@@ -1,0 +1,52 @@
+CREATE (jericocross001:usuario {nombreu:'jericocross001',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross002:usuario {nombreu:'jericocross002',passwordu:'hola', modou:'Privado'})
+CREATE (jericocross003:usuario {nombreu:'jericocross003',passwordu:'hola', modou:'Privado'})
+CREATE (jericocross004:usuario {nombreu:'jericocross004',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross005:usuario {nombreu:'jericocross005',passwordu:'hola', modou:'Publico'})
+CREATE (twet:tweet {fecha:'24:15,25/09/2018', texto:'tengo hambre'})
+CREATE
+  (jericocross001)-[:follows {estado:['1']}]->(jericocross005),
+  (jericocross001)-[:follows {estado:['0']}]->(jericocross002),
+  (jericocross001)-[:creatweet]->(twet),
+  (jericocross005)-[:follows {estado:['1']}]->(jericocross001),
+  (twet)-[:enviaa]->(jericocross005),
+  (twet)-[:enviaa]->(jericocross002)
+
+
+prueba 5 nivel:
+CREATE (jericocross001:usuario {nombreu:'jericocross001',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross002:usuario {nombreu:'jericocross002',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross003:usuario {nombreu:'jericocross003',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross004:usuario {nombreu:'jericocross004',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross005:usuario {nombreu:'jericocross005',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross006:usuario {nombreu:'jericocross006',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross007:usuario {nombreu:'jericocross007',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross008:usuario {nombreu:'jericocross008',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross009:usuario {nombreu:'jericocross009',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross010:usuario {nombreu:'jericocross010',passwordu:'hola', modou:'Publico'})
+CREATE (jericocross011:usuario {nombreu:'jericocross011',passwordu:'hola', modou:'Publico'})
+CREATE (Cali:ciudad {nombre:'Cali'})
+CREATE (Medellin:ciudad {nombre:'Medellin'})
+CREATE (Bogota:ciudad {nombre:'Bogota'})
+CREATE (Huila:ciudad {nombre:'Huila'})
+CREATE (Tulua:ciudad {nombre:'Tulua'})
+CREATE (Palmira:ciudad {nombre:'Palmira'})
+CREATE (Yumbo:ciudad {nombre:'Yumbo'})
+CREATE (Neiva:ciudad {nombre:'Neiva'})
+CREATE (Barranquilla:ciudad {nombre:'Barranquilla'})
+CREATE (Pasto:ciudad {nombre:'Pasto'})
+CREATE (Dapa:ciudad {nombre:'Dapa'})
+CREATE
+  (jericocross001)-[:follows {estado:['1']}]->(jericocross002),
+  (jericocross002)-[:follows {estado:['1']}]->(jericocross003),
+  (jericocross003)-[:follows {estado:['1']}]->(jericocross004),
+  (jericocross004)-[:follows {estado:['1']}]->(jericocross005),
+  (jericocross004)-[:follows {estado:['1']}]->(jericocross007),
+  (jericocross005)-[:follows {estado:['1']}]->(jericocross006),
+  (jericocross005)-[:follows {estado:['1']}]->(jericocross002),
+  (jericocross005)-[:follows {estado:['1']}]->(jericocross003),
+  (jericocross007)-[:follows {estado:['1']}]->(jericocross001),
+  (jericocross007)-[:follows {estado:['1']}]->(jericocross002),
+  (jericocross007)-[:follows {estado:['1']}]->(jericocross003),
+  (jericocross007)-[:follows {estado:['1']}]->(jericocross005),
+  (jericocross005)-[:follows {estado:['1']}]->(jericocross004)

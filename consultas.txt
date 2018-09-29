@@ -1,0 +1,54 @@
+Cambia la propiedad estado de la relacion follows de 0 a 1(es seguidor):
+MATCH (b:usuario)-[r:follows {estado:['0']}]->(a:usuario) WHERE a.nombreu='"+user.getusername()+"' and b.nombreu='"+user.getinvitations()[o-1]+"' SET r.estado =['1'] 
+
+Obtener los tweets que han sido remitidos al usuario:
+MATCH (a)-[:enviaa]->(b) WHERE b.nombreu = '"+user.getusername()+"' RETURN a 
+
+Obtener el nodo completo del tweet creado por un usuario de nombre dado:
+MATCH (a:usuario)-[:creatweet]->(t:tweet) WHERE a.nombreu = '"+x+"' RETURN t
+
+Busqueda del usuario con nombre proporcionado, al cual posteriormente se le hace cambio de la propiedad "modou"(privacidad):
+MATCH (a:usuario) WHERE a.nombreu='"+user.getusername()+"' SET a.modou ='"+user.getusermode()+"'")
+
+Elimina la relacion entre un usuario y ciudad de nombre dados:
+MATCH (a:usuario)-[r:viveen]->(b:ciudad) WHERE a.nombreu='"+user.getusername()+"' and b.nombre='"+user.getciudad()+"' DELETE r
+
+Retorna el nodo completo de una ciudad con nombre dado:
+MATCH (a:ciudad) WHERE a.nombre='"+str(ciudad)+"' RETURN a
+
+Retorna el nodo completo de un usuario con nombre dado:
+MATCH (a:usuario) WHERE a.nombreu='"+nombre+"' RETURN a
+
+Retorna la relacion entre dos usuarios de nombre dado
+MATCH (b:usuario)-[r:follows {estado:['1']}]->(a:usuario) WHERE a.nombreu='"+nombre+"' and b.nombreu='"+node['nombreu']+"' RETURN r
+
+Retorna los tweets que han sido creados por una cuenta con nombre dado:
+MATCH (a:usuario)-[:creatweet]->(b:tweet) where a.nombreu='"+nombre+"' RETURN b
+
+Transaccion realizada para crear una relacion de seguimiento donde la variable o debende de la privacidad de dic, es decir si se le manda solicitud o no:
+tx=m.begin()
+ab = Relationship(node, "follows", dic)
+ab['estado']=[str(o)]
+tx.create(ab)
+tx.commit()
+
+
+Obtener los nombres de aquellas cuentas que se encuentran en un quinto nivel despues del usuario en seguimiento aceptado:
+MATCH (a:usuario)-[:follows {estado:['1']}]->(b:usuario)-[:follows {estado:['1']}]->(c:usuario)-[:follows {estado:['1']}]->(d:usuario)-[:follows {estado:['1']}]->(e:usuario)-[:follows {estado:['1']}]->(f:usuario) WHERE a.nombreu='"+user.getusername()+"' RETURN f.nombreu AS nombre
+
+Obtener los nombres de aquellas cuentas que siquen a el usuario, es decir, el estado de la relacion seguir es igual a 1:
+MATCH (b:usuario)-[:follows {estado:['1']}]->(a:usuario) where a.nombreu='"+user.getusername()+"' RETURN b.nombreu AS Nombre
+
+Obtener aquellas cuentas que son seguidos por el usuario, es decir, el estado de la relacion seguir es igual a 1:
+MATCH (a:usuario)-[:follows {estado:['1']}]->(b:usuario) where a.nombreu='"+user.getusername()+"' RETURN b.nombreu AS Nombre
+
+Obtener los nombres de aquellas cuentas que han enviado solicitud de amistad a el usuario, es decir, el estado de la relacion seguir es igual a 0:
+MATCH (b:usuario)-[:follows {estado:['0']}]->(a:usuario) where a.nombreu='"+user.getusername()+"' RETURN b.nombreu AS Nombre")
+
+
+Obtener el nombre de la ciudad en la que vive el usuario por medio de su nombre, retornado como Nombre:
+m.run("MATCH (a:usuario)-[:viveen]->(b:ciudad) WHERE a.nombreu='"+user.getusername()+"' RETURN b.nombre AS Nombre").evaluate()
+
+
+Obtener el nodo al cual le pertenece un nombre igual al proporcionado por el usuario para iniciar sesion:
+m.run("MATCH (a:usuario) WHERE a.nombreu='"+Nombre+"' RETURN a").evaluate()
